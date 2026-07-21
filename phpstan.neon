@@ -1,0 +1,15 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: max
+    paths:
+        - src/
+    excludePaths:
+        - src/Facades/*
+    ignoreErrors:
+        # Public API trait applied by the consumer's User model — legitimately
+        # unused within the package's own source, so PHPStan skips analysing it.
+        -
+            identifier: trait.unused
+            path: src/Models/Concerns/HasUserSessions.php

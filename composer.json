@@ -1,0 +1,81 @@
+{
+    "name": "rene-roscher/user-sessions-laravel",
+    "description": "Device management, logout other devices and new-device alerts for Laravel — without giving up your cache-based session driver.",
+    "keywords": ["laravel", "session", "redis", "devices", "logout", "security", "impersonation"],
+    "license": "MIT",
+    "type": "library",
+    "homepage": "https://github.com/Rene-Roscher/user-sessions-laravel",
+    "authors": [
+        {
+            "name": "Rene Roscher",
+            "email": "roscher794@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/Rene-Roscher/user-sessions-laravel/issues",
+        "source": "https://github.com/Rene-Roscher/user-sessions-laravel"
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "illuminate/database": "^12.0|^13.0",
+        "illuminate/session": "^12.0|^13.0",
+        "illuminate/auth": "^12.0|^13.0",
+        "illuminate/events": "^12.0|^13.0",
+        "illuminate/http": "^12.0|^13.0",
+        "illuminate/broadcasting": "^12.0|^13.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.10",
+        "laravel/pint": "^1.18",
+        "orchestra/testbench": "^10.0|^11.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "pestphp/pest-plugin-type-coverage": "^3.0",
+        "phpstan/phpstan": "^2.0",
+        "predis/predis": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ReneRoscher\\UserSessions\\": "src/",
+            "ReneRoscher\\UserSessions\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ReneRoscher\\UserSessions\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "test:coverage": "pest --coverage --min=90 --type-coverage --min=100",
+        "lint": "pint --test",
+        "lint:fix": "pint",
+        "analyse": "phpstan analyse",
+        "check": [
+            "@lint",
+            "@analyse",
+            "@test:coverage"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ReneRoscher\\UserSessions\\UserSessionsServiceProvider"
+            ],
+            "aliases": {
+                "UserSessions": "ReneRoscher\\UserSessions\\Facades\\UserSessions"
+            }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

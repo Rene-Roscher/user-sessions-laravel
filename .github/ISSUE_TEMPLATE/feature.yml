@@ -1,0 +1,33 @@
+name: Feature request
+description: Suggest an idea for this package
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Please check the Non-Goals first.** 2FA, device fingerprinting, geo-IP, UI components and
+        request logging are intentionally out of scope and belong in separate packages. This package
+        integrates with the framework, not the ecosystem.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the use case, not just the solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: non-goals
+    attributes:
+      label: Confirmation
+      options:
+        - label: I've read the Non-Goals in the README and this request is in scope.
+          required: true
