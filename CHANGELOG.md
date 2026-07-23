@@ -5,9 +5,12 @@ All notable changes to `rene-roscher/user-sessions-laravel` will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased](https://github.com/Rene-Roscher/user-sessions-laravel/commits/main/compare/v1.0.0...HEAD)
+
+## [v1.0.0](https://github.com/Rene-Roscher/user-sessions-laravel/commits/main/compare/main...v1.0.0) - 2026-07-23
 
 ### Added
+
 - **`HasUserSessions::revokeSession(string $id, ?string $revokedBy = RevokedBy::SELF): bool`** — revoke
   one of the user's own sessions by registry id. Scoped to the user's rows, so a foreign id is a
   miss rather than a cross-account revoke. The standard device-list controller no longer needs to
@@ -46,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Architecture tests enforcing the Octane rules; PHPStan level max; 100% type coverage.
 
 ### Hardened
+
 - Device lists are bounded by a new `max_listed` config (default 100). Nothing stops a
   scripted client from logging in repeatedly and accumulating rows, and rendering that
   list hydrates every row and asks the session store about each one.
@@ -54,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Under a long-running worker any such property would serve one user's device to the next.
 
 ### Testing
+
 - The suite now runs against **MySQL 8 and PostgreSQL 16** as well as SQLite, and against
   every session driver. SQLite does not enforce column widths or validate UTF-8, so it
   could never have failed on the User-Agent defects fixed below — verified by mutation:
@@ -67,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   container singleton retains a `Request`, a user or a session row.
 
 ### Fixed
+
 - **The architecture test guarding against request-scoped state could never fail.** Its
   per-property assertions passed a failure message to `not->toContain()`, but `toContain()`
   takes only needles — the message became a second needle that never matched, and a
@@ -125,5 +131,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   breaking the user's flow.
 - Added indexes for the device-list query (`user_type, user_id, revoked_at`) and for pruning
   (`revoked_at`).
-
-[Unreleased]: https://github.com/Rene-Roscher/user-sessions-laravel/commits/main
